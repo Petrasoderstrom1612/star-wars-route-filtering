@@ -1,5 +1,5 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 
 const swCharacters = [
   { name: "Luke Skywalker", type: "Jedi" },
@@ -25,6 +25,11 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
   return (
   <main>
     <h1>Star wars characters</h1>
+    <nav>
+      <Link to="?type=jedi">Jedis </Link>
+      <Link to="?type=sith">Siths </Link>
+      <Link to=".">Clear search</Link> // It would also work with empty ""  meaning clear what is there
+    </nav>
     {characterEl}
   </main>
   );
