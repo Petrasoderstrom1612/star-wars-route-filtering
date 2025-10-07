@@ -28,7 +28,7 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
     <nav>
       <Link to="?type=jedi">Jedis </Link>
       <Link to="?type=sith">Siths </Link>
-      <Link to=".">Clear search</Link> // It would also work with empty ""  meaning clear what is there
+      <Link to=".">Clear search</Link> {/* It would also work with empty ""  meaning clear what is there */}
     </nav>
     {characterEl}
   </main>
