@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 const swCharacters = [
   { name: "Luke Skywalker", type: "Jedi" },
@@ -8,9 +9,14 @@ const swCharacters = [
 ];
 
 const Characters = () => {
+const [searchParams, setSearchParams] = useSearchParams()
 
+const filterParam = searchParams.get("type")
+console.log(searchParams)
 
-    const characterEl = swCharacters.map(char => (
+const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => oneChar.type.toLocaleLowerCase() === filterParam): swCharacters //if you write wrong filterParam, the ternary will go to if as filterParam is true and return an empty [] as it wil get 0 match on .type. That means mapping will not have anything to map over, hence not return anything.
+
+    const characterEl = possiblyFilteredCharacters.map(char => (
         <div key={char.name}>
             <h3 style={{color: char.type === "Jedi" ? "blue" : "red"}}>Name: {char.name}</h3>
             <p>Type: {char.type}</p>
