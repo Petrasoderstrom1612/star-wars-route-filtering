@@ -6,6 +6,7 @@ const swCharacters = [
   { name: "Darth Vader", type: "Sith" },
   { name: "Emperor Palpatine", type: "Sith" },
   { name: "Yoda", type: "Jedi" },
+  { name: "Krakana", type: "animal" },
 ];
 
 const Characters = () => {
@@ -18,7 +19,7 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
 
     const characterEl = possiblyFilteredCharacters.map(char => (
         <div key={char.name}>
-            <h3 style={{color: char.type === "Jedi" ? "blue" : "red"}}>Name: {char.name}</h3>
+            <h3 style={{color: char.type === "Jedi" ? "blue" : char.type === "Sith" ? "red" : "purple"}}>Name: {char.name}</h3>
             <p>Type: {char.type}</p>
         </div>
     ))
@@ -26,8 +27,9 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
   <main>
     <h1>Star wars characters</h1>
     <nav>
-      <Link to="?type=jedi">Jedis </Link>
-      <Link to="?type=sith">Siths </Link>
+      <button onClick={() => setSearchParams({type: "jedi"}) }>Jedis </button>
+      <button onClick={() => setSearchParams("?type=sith")}>Siths </button>
+      <button onClick={() => setSearchParams("type=animal")}>Animals</button>
       <Link to=".">Clear search</Link> {/* It would also work with empty ""  meaning clear what is there */}
     </nav>
     {characterEl}
