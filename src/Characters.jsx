@@ -23,14 +23,30 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
             <p>Type: {char.type}</p>
         </div>
     ))
+
+    const generateNewSearchParamsSegment = (key, value) => { //a fnc to ensure you can concatenate several params in URL with & and only modify this specific param(segment) based on key
+      const searchParametersSegment = new URLSearchParams(searchParams) //shallow copy of the current searchParams state fetched from URL
+      if (value === null){ //if value is noll, use .delete
+        searchParametersSegment.delete(key)
+      } else {
+        searchParametersSegment.set(key,value) //if there is value, add it to the string
+      }
+      return `?${searchParametersSegment.toString()}` //you must return something and convert it in the "?string" from
+    }
+
   return (
   <main>
     <h1>Star wars characters</h1>
+    <div>
+      <Link to={generateNewSearchParamsSegment("type", "jedi")}>Jedis</Link>
+      <Link to={generateNewSearchParamsSegment("type", "sith")}>Siths</Link>
+      <Link to={generateNewSearchParamsSegment("type", null)}>Clear</Link>
+    </div>
     <nav>
-      <button onClick={() => setSearchParams({type: "jedi"}) }>Jedis </button>
+      {/* <button onClick={() => setSearchParams({type: "jedi"}) }>Jedis </button>
       <button onClick={() => setSearchParams("?type=sith")}>Siths </button>
       <button onClick={() => setSearchParams("type=animal")}>Animals</button>
-      <Link to=".">Clear search</Link> {/* It would also work with empty ""  meaning clear what is there */}
+      <Link to=".">Clear search</Link> It would also work with empty ""  meaning clear what is there */}
     </nav>
     {characterEl}
   </main>
