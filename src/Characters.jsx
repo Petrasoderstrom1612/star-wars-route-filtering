@@ -24,6 +24,7 @@ const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => 
         </div>
     ))
 
+    //This function will only modify the param with key "type" as per Links
     const generateNewSearchParamsSegment = (key, value) => { //a fnc to ensure you can concatenate several params in URL with & and only modify this specific param(segment) based on key
       const searchParametersSegment = new URLSearchParams(searchParams) //shallow copy of the current searchParams state fetched from URL
       if (value === null){ //if value is noll, use .delete
