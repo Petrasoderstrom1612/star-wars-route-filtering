@@ -78,7 +78,7 @@ console.log(possiblyFilteredCharacters) //arr with filtered swCharacters objects
     <nav>
       <button onClick={() => setNewSearchParamsSegment("type", "jedi") }>Jedis </button>
       <button onClick={() => setNewSearchParamsSegment("type", "sith")}>Siths </button>
-      <button onClick={() => setNewSearchParamsSegment("type", "sith")}>Siths </button>
+      <button onClick={() => setNewSearchParamsSegment("type", "animal")}>Animal </button>
       <button onClick={() => setNewSearchParamsSegment("body", "tall")}>Tall body </button>
       <button onClick={() => setSearchParams({})}>Clear filters</button>
     </nav>
