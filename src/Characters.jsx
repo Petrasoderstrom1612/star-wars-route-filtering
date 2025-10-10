@@ -2,11 +2,11 @@ import React from "react";
 import { useSearchParams, Link } from "react-router-dom";
 
 const swCharacters = [
-  { name: "Luke Skywalker", type: "Jedi" },
-  { name: "Darth Vader", type: "Sith" },
-  { name: "Emperor Palpatine", type: "Sith" },
-  { name: "Yoda", type: "Jedi" },
-  { name: "Krakana", type: "animal" },
+  { name: "Luke Skywalker", type: "Jedi", id: "1" },
+  { name: "Darth Vader", type: "Sith", id: "2" },
+  { name: "Emperor Palpatine", type: "Sith", id: "3" },
+  { name: "Yoda", type: "Jedi", id: "4" },
+  { name: "Krakana", type: "animal", id: "5" },
 ];
 
 const Characters = () => {
@@ -18,10 +18,12 @@ console.log(searchParams)
 const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => oneChar.type.toLocaleLowerCase() === filterParam): swCharacters //if you write wrong filterParam, the ternary will go to if as filterParam is true and return an empty [] as it wil get 0 match on .type. That means mapping will not have anything to map over, hence not return anything.
 
     const characterEl = possiblyFilteredCharacters.map(char => (
-        <div key={char.name}>
+        <Link to={char.id} key={char.name}>
+          <div className="box">
             <h3 style={{color: char.type === "Jedi" ? "blue" : char.type === "Sith" ? "red" : "purple"}}>Name: {char.name}</h3>
             <p>Type: {char.type}</p>
-        </div>
+            </div>
+        </Link>
     ))
 
     //This function will only modify the param with key "type" as per Links
