@@ -13,26 +13,8 @@ const swCharacters = [
 const Characters = () => {
 const [searchParams, setSearchParams] = useSearchParams()
 
-const filterParam = searchParams.get("type") //the value in string format for specifically key 'type' (ex. "jedi" (from url inserted from Link ?type="jedi")
 const queryString = searchParams.toString() //all search params without ? (from state that connects to url via Router)
-
-
 const searchFilter = queryString ? `?${queryString}` : ""
-
-//const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => oneChar.type.toLocaleLowerCase() === filterParam): swCharacters //if you write wrong filterParam, the ternary will go to if as filterParam is true and return an empty [] as it wil get 0 match on .type. That means mapping will not have anything to map over, hence not return anything.
-
-
-const possiblyFilteredCharacters = swCharacters.filter(char => { //NO HARDCODING; filter fwd truthy values
-  for (const [key, value] of searchParams.entries()) { //.entries() is an iterator
-    if (!char[key] || char[key].toString().toLowerCase() !== value.toLowerCase()) { //if key is wrong or the value in filter is not the one from URL
-      return false; // exclude 
-    }
-  }
-  return true; // include if filtered params match
-});
-
-console.log(possiblyFilteredCharacters) //arr with filtered swCharacters objects
-
 
     const characterEl = possiblyFilteredCharacters.map(char => (
         <Link to={`${char.id}${searchFilter}`} key={char.name}> {/* artificially adding search filters after the last param to the URL*/}

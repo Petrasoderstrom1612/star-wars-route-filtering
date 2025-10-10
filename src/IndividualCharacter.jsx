@@ -10,11 +10,12 @@ const swCharacters = [
 ];
 
 const IndividualCharacter = () => {
+  //for JSX
     const lastSegment = useParams() // {id: '1'}
-
     const theIndividualCharacter = swCharacters.find(oneObj => oneObj.id === lastSegment.id) //find has only one truthy match, the first one and it looks at a specific property as a source of truth but returns the whole object, you can look at source of truth in any way
     console.log(theIndividualCharacter)
 
+    //for Link to go Back
     const [searchParams, setSearchParams] = useSearchParams()
     const searchFilters = "?" + searchParams.toString() //searchParams are all search params without ?
 
