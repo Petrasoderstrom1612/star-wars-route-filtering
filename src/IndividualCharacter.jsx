@@ -1,15 +1,10 @@
 import React from 'react'
-import {  Link, useParams, useSearchParams } from "react-router-dom";
+import {  Link, useParams, useSearchParams, useOutletContext } from "react-router-dom";
 
-const swCharacters = [
-  { name: "Luke Skywalker", type: "Jedi", id: "1" },
-  { name: "Darth Vader", type: "Sith", id: "2" },
-  { name: "Emperor Palpatine", type: "Sith", id: "3" },
-  { name: "Yoda", type: "Jedi", id: "4" },
-  { name: "Krakana", type: "animal", id: "5" },
-];
 
 const IndividualCharacter = () => {
+  const { swCharacters } = useOutletContext()
+  
   //for JSX
     const lastSegment = useParams() // {id: '1'}
     const theIndividualCharacter = swCharacters.find(oneObj => oneObj.id === lastSegment.id) //find has only one truthy match, the first one and it looks at a specific property as a source of truth but returns the whole object, you can look at source of truth in any way

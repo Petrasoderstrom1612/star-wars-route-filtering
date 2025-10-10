@@ -1,20 +1,27 @@
 import React from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom"
 
-const swCharacters = [
-  { name: "Luke Skywalker", type: "Jedi", id: "1", body: "tall" },
-  { name: "Darth Vader", type: "Sith", id: "2" },
-  { name: "Emperor Palpatine", type: "Sith", id: "3" },
-  { name: "Yoda", type: "Jedi", id: "4" },
-  { name: "Krakana", type: "animal", id: "5" },
-  { name: "Luke Taller", type: "Jedi", id: "6", body: "tall"},
-];
+
 
 const Characters = () => {
+const { swCharacters } = useOutletContext()
 const [searchParams, setSearchParams] = useSearchParams()
 
 const queryString = searchParams.toString() //all search params without ? (from state that connects to url via Router)
 const searchFilter = queryString ? `?${queryString}` : ""
+
+//const possiblyFilteredCharacters = filterParam ? swCharacters.filter(oneChar => oneChar.type.toLocaleLowerCase() === filterParam): swCharacters //if you write wrong filterParam, the ternary will go to if as filterParam is true and return an empty [] as it wil get 0 match on .type. That means mapping will not have anything to map over, hence not return anything.
+
+
+const possiblyFilteredCharacters = swCharacters.filter(char => { //NO HARDCODING; filter fwd truthy values
+  for (const [key, value] of searchParams.entries()) { //.entries() is an iterator
+    if (!char[key] || char[key].toString().toLowerCase() !== value.toLowerCase()) { //if no filter or the value in filter is not the one from URL
+      return false; // exclude if any param doesn't match
+    }
+  }
+  return true; // include if filtered params match
+});
 
     const characterEl = possiblyFilteredCharacters.map(char => (
         <Link to={`${char.id}${searchFilter}`} key={char.name}> {/* artificially adding search filters after the last param to the URL*/}
