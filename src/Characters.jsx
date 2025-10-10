@@ -24,8 +24,8 @@ const searchFilter = queryString ? `?${queryString}` : ""
 
 const possiblyFilteredCharacters = swCharacters.filter(char => { //NO HARDCODING; filter fwd truthy values
   for (const [key, value] of searchParams.entries()) { //.entries() is an iterator
-    if (!char[key] || char[key].toString().toLowerCase() !== value.toLowerCase()) { //if no filter or the value in filter is not the one from URL
-      return false; // exclude if any param doesn't match
+    if (!char[key] || char[key].toString().toLowerCase() !== value.toLowerCase()) { //if key is wrong or the value in filter is not the one from URL
+      return false; // exclude 
     }
   }
   return true; // include if filtered params match
